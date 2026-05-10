@@ -1,0 +1,50 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import { getLangFromUrl, useTranslations } from "@/i18n/utils"
+import * as metadata from "@/content/metadata.md"
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
+<Layout
+  title={metadata.frontmatter.thankYou.title}
+  description={metadata.frontmatter.thankYou.description}
+>
+  <main class="flex min-h-screen flex-col items-center justify-center gap-4">
+    <h1 class="heading text-4xl uppercase">{t("thank-you.heading")}</h1>
+    <p class="text-secondary">
+      {t("thank-you.subheading")}
+    </p>
+    <p class="text-secondary">{t("thank-you.socials")}</p>
+    <ul class="flex items-center space-x-5 p-3">
+      {
+        metadata.frontmatter.socials.map(
+          (link: { name: string; href: string }) => (
+            <li>
+              <a
+                href={link.href}
+                class="font-bold underline underline-offset-4"
+              >
+                {link.name}
+              </a>
+            </li>
+          ),
+        )
+      }
+    </ul>
+    <p class="text-secondary">{t("thank-you.email")}</p>
+    <a
+      href={`mailto:${metadata.frontmatter.email}`}
+      class="font-bold underline underline-offset-4"
+    >
+      {metadata.frontmatter.email}
+    </a>
+    <a
+      href="/"
+      class="hover:text-primary cursor-pointer text-xl uppercase underline underline-offset-4"
+    >
+      &larr; {t("home")}
+    </a>
+  </main>
+</Layout>

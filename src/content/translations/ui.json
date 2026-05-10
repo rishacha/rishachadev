@@ -27,6 +27,10 @@
     "footer.all-rights-reserved": "All Rights Reserved.",
     "404.page-not-found": "Page Not Found",
     "404.information": "What you seek never existed, or perhaps has ceased to exist.",
-    "404.back": "Go Back"
+    "404.back": "Go Back",
+    "thank-you.heading": "Thank You",
+    "thank-you.subheading": "Thank you for contacting me, I'll get back to you very soon.",
+    "thank-you.socials": "You can also contact me @",
+    "thank-you.email": "or drop me a mail"
   }
 }

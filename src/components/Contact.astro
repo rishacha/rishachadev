@@ -34,7 +34,11 @@ const t = useTranslations(lang)
       </div>
     </div>
 
-    <form class="space-y-6">
+    <form
+      class="space-y-6"
+      action={`https://api.formsync.app/v1/s/${import.meta.env.PUBLIC_FORM_ID}`}
+      method="POST"
+    >
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <div class="relative">
           <input
@@ -42,7 +46,7 @@ const t = useTranslations(lang)
             id="name"
             name="name"
             class="peer border-secondary w-full rounded-3xl border border-dashed p-4 text-xl placeholder-transparent focus:outline-none"
-            placeholder="Name"
+            placeholder={t("name")}
             required
           />
           <label
@@ -59,7 +63,7 @@ const t = useTranslations(lang)
             id="email"
             name="email"
             class="peer border-secondary w-full rounded-3xl border border-dashed p-4 text-xl placeholder-transparent focus:outline-none"
-            placeholder="Email"
+            placeholder={t("email")}
             required
           />
           <label
@@ -77,7 +81,7 @@ const t = useTranslations(lang)
           name="message"
           rows="6"
           class="peer border-secondary w-full resize-none rounded-3xl border border-dashed p-4 text-xl placeholder-transparent focus:outline-none"
-          placeholder="Message"
+          placeholder={t("message")}
           required></textarea>
         <label
           for="message"

@@ -23,5 +23,8 @@ projects:
 blog:
     title: Blog
     description: A collection of articles on programming, projects and other stuff.
+thankYou:
+    title: Thank You For Contacting Me
+    description: Thank You for Contacting me via Contact Form.
 ---
 
