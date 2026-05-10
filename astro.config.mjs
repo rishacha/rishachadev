@@ -4,6 +4,8 @@ import { defineConfig, fontProviders } from "astro/config"
 
 import sitemap from "@astrojs/sitemap"
 
+import partytown from "@astrojs/partytown"
+
 const { URL } = loadEnv(import.meta.env.MODE, process.cwd(), "")
 
 // https://astro.build/config
@@ -25,5 +27,13 @@ export default defineConfig({
       provider: fontProviders.google(),
     },
   ],
-  integrations: [sitemap()],
+  integrations: [
+    sitemap(),
+    partytown({
+      config: {
+        forward: ["dataLayer.push"],
+      },
+    }),
+  ],
 })
+
