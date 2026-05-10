@@ -1,0 +1,47 @@
+---
+import { Picture } from "astro:assets"
+import selfie from "@/assets/media/rishacha.jpg"
+import * as about from "@/content/about.md"
+import { getLangFromUrl, useTranslations } from "@/i18n/utils"
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
+<section id="about" class="container mx-auto mb-28 p-6">
+  <h2 class="heading text-5xl uppercase md:text-9xl">{t("about.title")}</h2>
+  <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:p-0">
+    <div class="space-y-6">
+      <div
+        class="aspect-[668/516] w-full overflow-hidden rounded-3xl md:max-w-[668px]"
+      >
+        <Picture
+          src={selfie}
+          alt="Rishabh Chakraborty"
+          formats={["avif", "webp"]}
+          class="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+
+    <div>
+      <div class="text-secondary space-y-4 text-lg md:text-2xl">
+        <p>{about.frontmatter.content}</p>
+      </div>
+      <div>
+        <h3 class="heading text-secondary my-8 text-2xl uppercase">
+          {t("about.skills")}
+        </h3>
+        <div class="mt-8 flex flex-wrap gap-4">
+          {
+            about.frontmatter.skills.map((skill: string) => (
+              <span class="outline-secondary inline-flex items-center justify-center rounded-4xl px-8 py-4 outline-1 outline-dashed">
+                {skill}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

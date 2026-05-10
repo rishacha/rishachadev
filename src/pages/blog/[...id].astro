@@ -1,0 +1,85 @@
+---
+import { Picture } from "astro:assets"
+import Layout from "@/layouts/Layout.astro"
+import { getCollection, render, type CollectionEntry } from "astro:content"
+import FormattedDate from "@/components/FormattedDate.astro"
+import { getLangFromUrl, useTranslations } from "@/i18n/utils"
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+export async function getStaticPaths() {
+  const articles = (await getCollection("blog"))
+    .filter((article) => !article.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  return articles.map((article) => ({
+    params: { id: article.id },
+    props: article,
+  }))
+}
+
+type Props = CollectionEntry<"blog">
+
+const article = Astro.props
+
+const { Content } = await render(article)
+---
+
+<Layout title={article.data.title} description={article.data.description}>
+  <div class="container mx-auto space-y-8 px-6 pt-18">
+    <button
+      class="text-secondary hover:text-primary my-6 flex cursor-pointer items-center gap-2 pl-2"
+      title="back"
+      id="back-button"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-move-left-icon lucide-move-left"
+        ><path d="M6 8L2 12L6 16"></path><path d="M2 12H22"></path></svg
+      >
+      <span>{t("back")}</span>
+    </button>
+    <div
+      class="border-secondary flex flex-col justify-between gap-4 border-b border-dashed pb-4 md:flex-row md:items-center"
+    >
+      <div class="space-y-4">
+        <h1 class="heading text-3xl uppercase md:text-5xl">
+          {article.data.title}
+        </h1>
+        <p>{article.data.description}</p>
+        <p class="text-secondary">
+          <FormattedDate date={article.data.date} />
+        </p>
+      </div>
+    </div>
+    {
+      article.data.image && (
+        <div class="aspect-[610/400] w-full overflow-hidden rounded-2xl lg:h-[70vh]">
+          <Picture
+            src={article.data.image}
+            alt={article.data.title}
+            formats={["avif", "webp"]}
+            class="h-full w-full object-contain"
+          />
+        </div>
+      )
+    }
+    <article class="mx-auto mb-18 flex-2 px-3">
+      <Content />
+    </article>
+  </div>
+
+  <script is:inline>
+    document.getElementById("back-button").addEventListener("click", () => {
+      window.history.back()
+    })
+  </script>
+</Layout>

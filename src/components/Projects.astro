@@ -1,0 +1,61 @@
+---
+import Card from "@/components/Card.astro"
+import { getCollection, type CollectionEntry } from "astro:content"
+import { getLangFromUrl, useTranslations } from "@/i18n/utils"
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const allProjects: CollectionEntry<"projects">[] = (
+  await getCollection("projects")
+).slice(0, 3)
+---
+
+<section id="projects" class="container mx-auto px-6">
+  <div class="mb-12 overflow-hidden">
+    <div class="animate-scroll flex">
+      <div class="flex shrink-0 whitespace-nowrap">
+        {
+          Array.from({ length: 10 }).map((_) => (
+            <h2 class="heading mr-4 -mb-2 text-5xl uppercase md:mr-8 md:text-9xl">
+              {t("work")}
+            </h2>
+          ))
+        }
+      </div>
+      <div class="flex shrink-0 whitespace-nowrap" aria-hidden="true">
+        {
+          Array.from({ length: 10 }).map((_) => (
+            <h2 class="heading mr-4 -mb-2 text-5xl uppercase md:mr-8 md:text-9xl">
+              {t("work")}
+            </h2>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+  {allProjects.map((project) => <Card entry={project} />)}
+  <div class="flex justify-end">
+    <a
+      href="/projects"
+      class="bg-primary hover:bg-background hover:outline-secondary hover:text-foreground flex w-full cursor-pointer items-center justify-center rounded-2xl px-6 py-3 transition hover:outline hover:outline-1 hover:outline-dashed sm:w-auto sm:px-10 sm:py-4"
+    >
+      {t("more-projects")} &nbsp; &rarr;
+    </a>
+  </div>
+</section>
+
+<style>
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 15s linear infinite;
+  }
+</style>

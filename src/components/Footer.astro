@@ -1,0 +1,65 @@
+---
+import { NAVIGATION } from "@/lib/constants"
+import { getLangFromUrl, useTranslations } from "@/i18n/utils"
+import * as metadata from "@/content/metadata.md"
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
+<footer class="bg-primary container mx-auto space-y-8 rounded-t-[80px] p-10">
+  <div
+    class="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center"
+  >
+    <h2 class="text-5xl uppercase lg:text-9xl">{metadata.frontmatter.title}</h2>
+    <p class="max-w-[760px] text-2xl lg:text-3xl">
+      {metadata.frontmatter.quote}
+    </p>
+  </div>
+  <div class="flex flex-col justify-between gap-10 sm:flex-row sm:flex-wrap">
+    <div>
+      <h3 class="mb-2 font-mono text-xl font-bold uppercase">{t("contact")}</h3>
+      <ul>
+        <li>
+          <a href={`mailto:${metadata.frontmatter.email}`}>
+            {metadata.frontmatter.email}
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="mb-2 font-mono text-xl font-bold uppercase">
+        {t("navigation")}
+      </h3>
+      <ul class="text-secondary space-y-1">
+        {
+          NAVIGATION.map((link) => (
+            <li>
+              <a href={link.href}>{t(link.name)}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <h3 class="mb-2 font-mono text-xl font-bold uppercase">{t("socials")}</h3>
+      <ul class="text-secondary space-y-1">
+        {
+          metadata.frontmatter.socials.map(
+            (link: { name: string; href: string }) => (
+              <li>
+                <a href={link.href}>{link.name}</a>
+              </li>
+            ),
+          )
+        }
+      </ul>
+    </div>
+  </div>
+  <span class="block text-center text-sm opacity-70">
+    {t("footer.copyright")}
+    {new Date().getFullYear()} &bull;
+    {metadata.frontmatter.title}
+    &bull; {t("footer.all-rights-reserved")}
+  </span>
+</footer>

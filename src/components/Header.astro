@@ -1,0 +1,120 @@
+---
+import { NAVIGATION } from "@/lib/constants"
+import { getLangFromUrl, useTranslations } from "@/i18n/utils"
+import * as metadata from "@/content/metadata.md"
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
+<header
+  class="to-secondary/20 fixed top-0 z-50 w-full bg-gradient-to-t from-white"
+>
+  <div class="container mx-auto flex items-center justify-between p-6">
+    <a href="/" class="font-mono text-4xl font-bold"
+      >{metadata.frontmatter.title.toUpperCase().charAt(0)}.</a
+    >
+    <nav class="text-secondary hidden space-x-3 md:block">
+      {
+        NAVIGATION.map((link) => (
+          <a
+            href={link.href}
+            target="_self"
+            class="hover:border-secondary pb-0.5 font-mono font-bold uppercase hover:border-b-2 hover:border-dashed"
+          >
+            {t(link.name)}
+          </a>
+        ))
+      }
+    </nav>
+    <button
+      id="menu-toggle"
+      class="hamburger flex focus:outline-none md:hidden"
+      aria-label="Toggle navigation"
+    >
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+  <div
+    id="menu-mobile"
+    class="text-secondary bg-background hidden w-screen space-x-3 p-4 backdrop-blur-2xl md:hidden"
+  >
+    <nav class="flex flex-col gap-4 text-2xl">
+      {
+        NAVIGATION.map((link) => (
+          <a
+            href={link.href}
+            target="_self"
+            class="hover:border-secondary pb-0.5 hover:border-b-2 hover:border-dashed"
+          >
+            {t(link.name)}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<style>
+  .hamburger {
+    gap: 5px;
+    cursor: pointer;
+    position: relative;
+    width: 24px;
+    height: 21px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .hamburger-line {
+    width: 24px;
+    height: 3px;
+    background-color: var(--color-secondary, #000000);
+    transition: all 0.3s ease;
+    position: absolute;
+    left: 0;
+  }
+
+  .hamburger-line:nth-child(1) {
+    top: 0;
+  }
+
+  .hamburger-line:nth-child(2) {
+    top: 9px;
+  }
+
+  .hamburger-line:nth-child(3) {
+    top: 18px;
+  }
+
+  .hamburger.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg);
+    top: 9px;
+  }
+
+  .hamburger.active .hamburger-line:nth-child(2) {
+    display: none;
+    opacity: 0;
+  }
+
+  .hamburger.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 9px;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuMobile = document.getElementById("menu-mobile")
+    const toggle = document.getElementById("menu-toggle")
+    toggle?.addEventListener("click", () => {
+      menuMobile?.classList.toggle("hidden")
+      toggle.classList.toggle("active")
+      const expanded = toggle.classList.contains("active")
+      toggle.setAttribute("aria-expanded", String(expanded))
+    })
+  })
+</script>

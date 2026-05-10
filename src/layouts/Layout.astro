@@ -1,0 +1,43 @@
+---
+import { getLangFromUrl } from "@/i18n/utils"
+import BaseHead from "@/components/Head.astro"
+import Header from "@/components/Header.astro"
+import Footer from "@/components/Footer.astro"
+import * as metadata from "@/content/metadata.md"
+
+type Props = {
+  title: string
+  description: string
+  image?: string
+}
+
+const { title, description } = Astro.props
+
+const lang = getLangFromUrl(Astro.url)
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <BaseHead
+      title={`${title} | ${metadata.frontmatter.title}`}
+      description={description}
+    />
+  </head>
+  <body>
+    <Header />
+    <div class="relative min-h-screen w-full">
+      <div
+        class="bg-background fixed inset-0 -z-50"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.10) 1px, transparent 0)",
+          backgroundSize: "25px 25px",
+        }}
+      >
+      </div>
+      <slot />
+    </div>
+    <Footer />
+  </body>
+</html>

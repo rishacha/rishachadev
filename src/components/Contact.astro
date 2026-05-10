@@ -1,0 +1,98 @@
+---
+import * as metadata from "@/content/metadata.md"
+import { getLangFromUrl, useTranslations } from "@/i18n/utils"
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
+<section id="contact" class="container mx-auto my-28 space-y-12 p-10">
+  <h2 class="heading text-5xl uppercase lg:text-9xl">{t("contact.title")}</h2>
+
+  <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+    <div class="space-y-6">
+      <p class="max-w-xl text-xl lg:text-3xl">
+        {t("contact.subtitle")}
+      </p>
+
+      <div class="space-y-2 text-xl">
+        {
+          metadata.frontmatter.socials.map(
+            (link: { name: string; href: string }) => (
+              <p>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  class="hover:text-secondary underline underline-offset-4 transition"
+                >
+                  {link.name}
+                </a>
+              </p>
+            ),
+          )
+        }
+      </div>
+    </div>
+
+    <form class="space-y-6">
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div class="relative">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="peer border-secondary w-full rounded-3xl border border-dashed p-4 text-xl placeholder-transparent focus:outline-none"
+            placeholder="Name"
+            required
+          />
+          <label
+            for="name"
+            class="peer-focus:text-secondary peer-focus:bg-background absolute top-4 left-4 text-xl text-gray-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-xl peer-focus:-top-2 peer-focus:px-2 peer-focus:text-sm"
+          >
+            {t("name")}
+          </label>
+        </div>
+
+        <div class="relative">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="peer border-secondary w-full rounded-3xl border border-dashed p-4 text-xl placeholder-transparent focus:outline-none"
+            placeholder="Email"
+            required
+          />
+          <label
+            for="email"
+            class="peer-focus:text-secondary peer-focus:bg-background absolute top-4 left-4 text-xl text-gray-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-xl peer-focus:-top-2 peer-focus:px-2 peer-focus:text-sm"
+          >
+            {t("email")}
+          </label>
+        </div>
+      </div>
+
+      <div class="relative">
+        <textarea
+          id="message"
+          name="message"
+          rows="6"
+          class="peer border-secondary w-full resize-none rounded-3xl border border-dashed p-4 text-xl placeholder-transparent focus:outline-none"
+          placeholder="Message"
+          required></textarea>
+        <label
+          for="message"
+          class="peer-focus:text-secondary peer-focus:bg-background absolute top-4 left-4 text-xl text-gray-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-xl peer-focus:-top-2 peer-focus:px-2 peer-focus:text-sm"
+        >
+          {t("message")}
+        </label>
+      </div>
+
+      <button
+        type="submit"
+        class="bg-primary hover:bg-background hover:outline-secondary hover:text-foreground flex cursor-pointer items-center justify-center rounded-2xl px-6 py-3 transition hover:outline hover:outline-1 hover:outline-dashed sm:px-10 sm:py-4"
+      >
+        {t("submit")}
+      </button>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,20 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import Hero from "@/components/Hero.astro"
+import About from "@/components/About.astro"
+import Projects from "@/components/Projects.astro"
+import Articles from "@/components/Articles.astro"
+import Contact from "@/components/Contact.astro"
+import * as metadata from "@/content/metadata.md"
+---
+
+<Layout
+  title={metadata.frontmatter.home.title}
+  description={metadata.frontmatter.home.description}
+>
+  <Hero />
+  <About />
+  <Projects />
+  <Articles />
+  <Contact />
+</Layout>

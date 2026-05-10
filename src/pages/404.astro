@@ -1,0 +1,21 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import { getLangFromUrl, useTranslations } from "@/i18n/utils"
+import * as metadata from "@/content/metadata.md"
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
+<Layout
+  title={metadata.frontmatter.title}
+  description={metadata.frontmatter.description}
+>
+  <main class="flex min-h-screen flex-col items-center justify-center gap-4">
+    <h1 class="heading text-4xl uppercase">404 | {t("404.page-not-found")}</h1>
+    <p class="text-secondary">
+      {t("404.information")}
+    </p>
+    <a href="/" class="cursor-pointer underline">&larr; {t("404.back")}</a>
+  </main>
+</Layout>

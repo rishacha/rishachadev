@@ -1,0 +1,32 @@
+{
+  "en": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "blog": "Blog",
+    "contact": "Contact",
+    "back": "Back",
+    "view-work": "View Work",
+    "hire-me": "Hire Me",
+    "about.title": "About Me",
+    "about.skills": "My Skills",
+    "work": "Work",
+    "source": "Source",
+    "link": "Link",
+    "more-projects": "More Projects",
+    "more-articles": "More Articles",
+    "contact.title": "Get In Touch",
+    "contact.subtitle": "Got an idea? A problem? A compliment? Slide into my inbox — let’s make something timeless together.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "submit": "Send Message",
+    "navigation": "Navigation",
+    "socials": "Socials",
+    "footer.copyright": "Copyright ©",
+    "footer.all-rights-reserved": "All Rights Reserved.",
+    "404.page-not-found": "Page Not Found",
+    "404.information": "What you seek never existed, or perhaps has ceased to exist.",
+    "404.back": "Go Back"
+  }
+}

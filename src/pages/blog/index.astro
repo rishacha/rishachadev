@@ -1,0 +1,56 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import Card from "@/components/Card.astro"
+import { getCollection, type CollectionEntry } from "astro:content"
+import * as metadata from "@/content/metadata.md"
+import { getLangFromUrl, useTranslations } from "@/i18n/utils"
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const data = (await getCollection("blog"))
+  .filter((article) => !article.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+
+type Acc = {
+  [year: string]: CollectionEntry<"blog">[]
+}
+
+const articles = data.reduce((acc: Acc, article) => {
+  const year = article.data.date.getFullYear().toString()
+  if (!acc[year]) {
+    acc[year] = []
+  }
+  acc[year].push(article)
+  return acc
+}, {})
+
+const years = Object.keys(articles).sort((a, b) => parseInt(b) - parseInt(a))
+---
+
+<Layout
+  title={metadata.frontmatter.blog.title}
+  description={metadata.frontmatter.blog.description}
+>
+  <section id="blog" class="container mx-auto px-6 pt-18">
+    <h2 class="heading my-8 mr-4 text-5xl uppercase md:mr-8 md:text-9xl">
+      {t("blog")}
+    </h2>
+    <section>
+      {
+        years.map((year) => (
+          <section class="animate space-y-4">
+            <h4 class="heading text-2xl lg:text-4xl">{year}</h4>
+            <div>
+              <ul class="not-prose flex flex-col gap-4">
+                {articles[year].map((article) => (
+                  <Card entry={article} />
+                ))}
+              </ul>
+            </div>
+          </section>
+        ))
+      }
+    </section>
+  </section>
+</Layout>
