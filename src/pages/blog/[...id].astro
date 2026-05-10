@@ -3,6 +3,7 @@ import { Picture } from "astro:assets"
 import Layout from "@/layouts/Layout.astro"
 import { getCollection, render, type CollectionEntry } from "astro:content"
 import FormattedDate from "@/components/FormattedDate.astro"
+import Comments from "@/components/Comments.astro"
 import { getLangFromUrl, useTranslations } from "@/i18n/utils"
 
 const lang = getLangFromUrl(Astro.url)
@@ -75,6 +76,10 @@ const { Content } = await render(article)
     <article class="mx-auto mb-18 flex-2 px-3">
       <Content />
     </article>
+
+    <div class="mx-auto my-10 w-full max-w-screen-md">
+      <Comments articleId={article.id} />
+    </div>
   </div>
 
   <script is:inline>
