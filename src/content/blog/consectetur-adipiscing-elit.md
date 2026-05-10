@@ -1,6 +1,7 @@
 ---
 title: "Consectetur adipiscing elit"
 description: "Duis aute irure dolor in reprehenderit in voluptate velit"
+image: /src/assets/media/image1.jpg
 date: "2026-03-24"
 tags:
   - Markdown

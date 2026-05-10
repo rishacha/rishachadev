@@ -1,11 +1,17 @@
 ---
 import { Picture } from "astro:assets"
-import selfie from "@/assets/media/rishacha.jpg"
 import * as about from "@/content/about.md"
 import { getLangFromUrl, useTranslations } from "@/i18n/utils"
+import { images } from "@/lib/utils"
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
+const imagePath = about.frontmatter.image
+
+if (!images[imagePath])
+  throw new Error(
+    `"${imagePath}" does not exist in glob: "src/assets/media/*.{jpeg,jpg,png,gif}"`,
+  )
 ---
 
 <section id="about" class="container mx-auto mb-28 p-6">
@@ -16,7 +22,7 @@ const t = useTranslations(lang)
         class="aspect-[668/516] w-full overflow-hidden rounded-3xl md:max-w-[668px]"
       >
         <Picture
-          src={selfie}
+          src={images[imagePath]()}
           alt="Rishabh Chakraborty"
           formats={["avif", "webp"]}
           class="h-full w-full object-cover"

@@ -1,6 +1,7 @@
 ---
 title: "Lorem Ipsum Dolor"
 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+image: /src/assets/media/image2.jpg
 date: "2026-02-26"
 tags:
   - Docs

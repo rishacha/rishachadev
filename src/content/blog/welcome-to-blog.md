@@ -1,6 +1,7 @@
 ---
 title: "Welcome to the Blog"
 description: "An example introductory post to demonstrate typical blog content."
+image: /src/assets/media/image3.jpg
 date: "2026-01-25"
 tags:
   - Intro

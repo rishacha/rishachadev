@@ -1,0 +1,144 @@
+media: src/assets/media
+content:
+  - name: metadata
+    label: Metadata
+    type: file
+    path: src/content/metadata.md
+    fields:
+      - name: url
+        label: URL
+        type: string
+      - name: title
+        label: Title
+        type: string
+      - name: description
+        label: Description
+        type: string
+      - name: email
+        label: Email
+        type: string
+      - name: quote
+        label: Quote
+        type: string
+      - name: socials
+        label: Socials
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Name
+            type: string
+          - name: href
+            label: HREF
+            type: string
+      - name: notFound
+        label: Not Found Page
+        type: object
+        fields:
+          - name: title
+            label: Title
+            type: string
+          - name: description
+            label: Description
+            type: string
+      - name: home
+        label: Home Page
+        type: object
+        fields:
+          - name: title
+            label: Title
+            type: string
+          - name: description
+            label: Description
+            type: string
+      - name: projects
+        label: Projects Page
+        type: object
+        fields:
+          - name: title
+            label: Title
+            type: string
+          - name: description
+            label: Description
+            type: string
+      - name: blog
+        label: Blog Page
+        type: object
+        fields:
+          - name: title
+            label: Title
+            type: string
+          - name: description
+            label: Description
+            type: string
+  - name: about
+    label: About
+    type: file
+    path: src/content/about.md
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: subtitle
+        label: Subtitle
+        type: string
+      - name: image
+        label: Image
+        type: image
+      - name: content
+        label: About Me
+        type: string
+      - name: skills
+        label: Skills
+        type: string
+        list: true
+  - name: projects
+    label: Projects
+    type: collection
+    path: src/content/projects
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: description
+        label: Description
+        type: string
+      - name: image
+        label: Cover Image
+        type: image
+      - name: link
+        label: Link to the Project
+        type: string
+      - name: source
+        label: Link to Source
+        type: string
+      - name: body
+        label: Body
+        type: rich-text
+  - name: blog
+    label: Blog
+    type: collection
+    path: src/content/blog
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: description
+        label: Description
+        type: string
+      - name: image
+        label: Cover Image
+        type: image
+      - name: date
+        label: Date
+        type: date
+      - name: draft
+        label: Draft
+        type: boolean
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+      - name: body
+        label: Body
+        type: rich-text
