@@ -9,12 +9,6 @@ content: Hi, I'm Rishabh Chakrabarti. I'm a full-stack developer with a strong
   JavaScript, TypeScript, and modern frameworks like Astro, React, and Svelte —
   but I’m most passionate about writing clean, resilient code that scales.
 skills:
-  - HTML
-  - CSS
-  - JavaScript
-  - TypeScript
-  - ReactJS
-  - TailwindCSS
-  - Express JS
-  - Mongo DB
+  - Python
+  - Rust
 ---
